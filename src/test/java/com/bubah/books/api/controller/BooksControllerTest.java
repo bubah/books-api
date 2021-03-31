@@ -1,6 +1,7 @@
 package com.bubah.books.api.controller;
 
 import com.bubah.books.api.domain.Book;
+import com.bubah.books.api.domain.BookId;
 import com.bubah.books.api.service.BookService;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,5 +48,27 @@ public class BooksControllerTest {
 
         // Then
         verify(bookService).getBooks();
+    }
+
+    @Test
+    public void createABook() throws Exception {
+        // Given
+        Gson gson = new Gson();
+        Book newBook = new Book();
+        newBook.setTitle("The DevOps Handbook");
+        String newBookAsJson = gson.toJson(newBook);
+
+        BookId bookId = new BookId();
+        bookId.setId("25");
+        String bookIdAsJson = gson.toJson(bookId);
+
+        when(bookService.createBook(newBook)).thenReturn(bookId);
+
+        // When
+        mockMvc.perform(post("/books").content(newBookAsJson))
+                .andExpect(content().json(bookIdAsJson))
+                .andExpect(status().isCreated());
+        // Then
+        verify(bookService).createBook(newBook);
     }
 }
