@@ -2,6 +2,7 @@ package com.bubah.books.api.controller;
 
 import com.bubah.books.api.domain.Book;
 import com.bubah.books.api.service.BookService;
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
@@ -29,12 +31,18 @@ public class BooksControllerTest {
     public void getBooks() throws Exception {
         // Given
         Book myBook = new Book();
+        myBook.setTitle("Harry Potter");
         List<Book> books = Collections.singletonList(myBook);
 
         when(bookService.getBooks()).thenReturn(books);
+//        String result = "/"
+        String booksAsJson = new Gson().toJson(books);
+
 
         // When
-        mockMvc.perform(get("/books")).andExpect(status().isOk());
+        mockMvc.perform(get("/books"))
+                .andExpect(content().json(booksAsJson))
+                .andExpect(status().isOk());
 
         // Then
         verify(bookService).getBooks();
