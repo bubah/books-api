@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -62,13 +64,13 @@ public class BooksControllerTest {
         bookId.setId("25");
         String bookIdAsJson = gson.toJson(bookId);
 
-        when(bookService.createBook(newBook)).thenReturn(bookId);
+        when(bookService.createBook(eq(newBook))).thenReturn(bookId);
 
         // When
-        mockMvc.perform(post("/books").content(newBookAsJson))
+        mockMvc.perform(post("/books").content(newBookAsJson).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(content().json(bookIdAsJson))
                 .andExpect(status().isCreated());
         // Then
-        verify(bookService).createBook(newBook);
+        verify(bookService).createBook(eq(newBook));
     }
 }
