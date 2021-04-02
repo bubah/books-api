@@ -64,13 +64,13 @@ public class BooksControllerTest {
         bookId.setId("25");
         String bookIdAsJson = gson.toJson(bookId);
 
-        when(bookService.createBook(eq(newBook))).thenReturn(bookId);
+        when(bookService.createBook(newBook)).thenReturn(bookId);
 
         // When
         mockMvc.perform(post("/books").content(newBookAsJson).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(content().json(bookIdAsJson))
                 .andExpect(status().isCreated());
         // Then
-        verify(bookService).createBook(eq(newBook));
+        verify(bookService).createBook(newBook);
     }
 }
