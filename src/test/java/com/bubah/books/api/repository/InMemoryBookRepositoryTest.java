@@ -1,6 +1,7 @@
 package com.bubah.books.api.repository;
 
 import com.bubah.books.api.domain.Book;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,5 +20,23 @@ class InMemoryBookRepositoryTest {
 
         // Then
         assertEquals(book, retrievedBook);
+    }
+
+    @Test
+    public void createBookReturnsAnId() {
+        // Given
+        BookRepository bookRepository = new InMemoryBookRepository();
+        Book firstBook = new Book();
+        firstBook.setTitle("DevOps Handbook");
+
+        Book secondBook = new Book();
+        secondBook.setTitle("Second Book");
+
+        // When
+        int bookId = bookRepository.createBook(firstBook);
+        int bookIdTwo = bookRepository.createBook(secondBook);
+
+        // Then
+        Assertions.assertThat(bookId).isLessThan(bookIdTwo);
     }
 }

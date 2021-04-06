@@ -1,21 +1,21 @@
 package com.bubah.books.api.repository;
 
 import com.bubah.books.api.domain.Book;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
-@Repository
 public class InMemoryBookRepository implements BookRepository {
 
-    // TODO: store books in a Map
-    Map<Integer, Book> booksById = new HashMap<>();
+    private static int ID_COUNTER = 0;
 
+    Map<Integer, Book> booksById = new HashMap<>();
     @Override
     public int createBook(Book book) {
-        booksById.put(1, book);
-        return 1;
+        ID_COUNTER += 1;
+        booksById.put(ID_COUNTER, book);
+        return ID_COUNTER;
     }
 
     @Override
