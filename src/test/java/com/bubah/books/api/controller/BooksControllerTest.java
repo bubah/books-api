@@ -36,6 +36,7 @@ public class BooksControllerTest {
         // Given
         Book myBook = new Book();
         myBook.setTitle("Harry Potter");
+        myBook.setId(20);
         List<Book> books = Collections.singletonList(myBook);
 
         when(bookService.getBooks()).thenReturn(books);
