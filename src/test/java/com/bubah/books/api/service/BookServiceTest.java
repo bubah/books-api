@@ -26,14 +26,14 @@ public class BookServiceTest {
         Book book = new Book();
         book.setTitle("DevOps Handbook");
 
-        when(bookRepository.createBook(book)).thenReturn(25);
+        when(bookRepository.createBook(book)).thenReturn(25L);
 
         // When
         BookId bookId = bookService.createBook(book);
 
         // Then
         verify(bookRepository).createBook(book);
-        assertEquals(bookId.getId(), "25");
+        assertEquals(bookId.getId(), 25L);
 
     }
 }

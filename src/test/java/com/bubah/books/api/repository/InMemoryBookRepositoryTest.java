@@ -15,8 +15,8 @@ class InMemoryBookRepositoryTest {
         book.setTitle("DevOps Handbook");
 
         // When
-        int bookId = bookRepository.createBook(book);
-        Book retrievedBook = bookRepository.findById(bookId);
+        Long bookId = bookRepository.createBook(book);
+        Book retrievedBook = bookRepository.findByBookId(bookId);
 
         // Then
         assertEquals(book, retrievedBook);
@@ -33,8 +33,8 @@ class InMemoryBookRepositoryTest {
         secondBook.setTitle("Second Book");
 
         // When
-        int bookId = bookRepository.createBook(firstBook);
-        int bookIdTwo = bookRepository.createBook(secondBook);
+        Long bookId = bookRepository.createBook(firstBook);
+        Long bookIdTwo = bookRepository.createBook(secondBook);
 
         // Then
         Assertions.assertThat(bookId).isLessThan(bookIdTwo);

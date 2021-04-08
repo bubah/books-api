@@ -4,22 +4,21 @@ import com.bubah.books.api.domain.Book;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class InMemoryBookRepository implements BookRepository {
 
-    private static int ID_COUNTER = 0;
+    private static Long ID_COUNTER = 0L;
 
-    Map<Integer, Book> booksById = new HashMap<>();
+    Map<Long, Book> booksById = new HashMap<Long, Book>();
     @Override
-    public int createBook(Book book) {
+    public Long createBook(Book book) {
         ID_COUNTER += 1;
         booksById.put(ID_COUNTER, book);
         return ID_COUNTER;
     }
 
     @Override
-    public Book findById(int bookId) {
+    public Book findByBookId(Long bookId) {
         return booksById.get(bookId);
     }
 }

@@ -1,13 +1,13 @@
 package com.bubah.books.api.domain;
 
 public class BookId {
-    private String id;
+    private Long id;
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 }

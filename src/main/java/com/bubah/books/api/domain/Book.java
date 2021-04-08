@@ -8,8 +8,7 @@ import java.util.Objects;
 @Document
 public class Book {
 
-    @Id
-    private Integer id;
+    private Long bookId;
 
     private String title;
 
@@ -36,11 +35,11 @@ public class Book {
         return Objects.hash(title);
     }
 
-    public int getId() {
-        return id;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 }

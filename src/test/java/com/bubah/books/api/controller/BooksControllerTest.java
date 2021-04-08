@@ -11,7 +11,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class BooksControllerTest {
         // Given
         Book myBook = new Book();
         myBook.setTitle("Harry Potter");
-        myBook.setId(20);
+        myBook.setBookId(20L);
         List<Book> books = Collections.singletonList(myBook);
 
         when(bookService.getBooks()).thenReturn(books);
@@ -62,7 +61,7 @@ public class BooksControllerTest {
         String newBookAsJson = gson.toJson(newBook);
 
         BookId bookId = new BookId();
-        bookId.setId("25");
+        bookId.setId(25L);
         String bookIdAsJson = gson.toJson(bookId);
 
         when(bookService.createBook(newBook)).thenReturn(bookId);

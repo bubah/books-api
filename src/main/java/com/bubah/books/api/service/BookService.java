@@ -4,7 +4,6 @@ import com.bubah.books.api.domain.Book;
 import com.bubah.books.api.domain.BookId;
 import com.bubah.books.api.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +20,9 @@ public class BookService {
 
 
     public BookId createBook(Book newBook) {
-        int id = bookRepository.createBook(newBook);
+        Long id = bookRepository.createBook(newBook);
         BookId bookId = new BookId();
-        bookId.setId(Integer.toString(id));
+        bookId.setId(id);
 
         return bookId;
     }

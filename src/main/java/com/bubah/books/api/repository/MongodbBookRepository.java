@@ -1,6 +1,7 @@
 package com.bubah.books.api.repository;
 
 import com.bubah.books.api.domain.Book;
+import com.bubah.books.api.domain.BookId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -9,21 +10,21 @@ import java.util.Optional;
 @Repository
 public class MongodbBookRepository  implements BookRepository {
 
+    private static Long ID_COUNTER = 0L;
+
     @Autowired
     BookMongoRepository bookMongoRepository;
 
     @Override
-    public int createBook(Book book) {
+    public Long createBook(Book book) {
+        ID_COUNTER++;
+        book.setBookId(ID_COUNTER);
         bookMongoRepository.save(book);
-        return book.getId();
+        return book.getBookId();
     }
 
     @Override
-    public Book findById(int bookId) {
-        Optional<Book> maybeBook = bookMongoRepository.findById(bookId);
-        if(maybeBook.isPresent()) {
-            return maybeBook.get();
-        }
-        return null;
+    public Book findByBookId(Long bookId) {
+        return bookMongoRepository.findByBookId(bookId);
     }
 }
