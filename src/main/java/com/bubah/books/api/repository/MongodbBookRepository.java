@@ -31,6 +31,6 @@ public class MongodbBookRepository  implements BookRepository {
 
     @Override
     public List<Book> getBooks() {
-        throw new UnsupportedOperationException("not implemented yet!!");
+        return bookMongoRepository.findAll();
     }
 }
