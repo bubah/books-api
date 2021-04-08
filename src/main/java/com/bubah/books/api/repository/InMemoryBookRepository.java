@@ -3,6 +3,7 @@ package com.bubah.books.api.repository;
 import com.bubah.books.api.domain.Book;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class InMemoryBookRepository implements BookRepository {
@@ -20,5 +21,10 @@ public class InMemoryBookRepository implements BookRepository {
     @Override
     public Book findByBookId(Long bookId) {
         return booksById.get(bookId);
+    }
+
+    @Override
+    public List<Book> getBooks() {
+        throw new UnsupportedOperationException("not implemented yet!!");
     }
 }
