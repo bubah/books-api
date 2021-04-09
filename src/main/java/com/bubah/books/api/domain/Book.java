@@ -7,6 +7,16 @@ import java.util.Objects;
 
 @Document
 public class Book {
+    @Id
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     private Long bookId;
 
