@@ -1,20 +1,15 @@
 package com.bubah.books.api.repository;
 
 import com.bubah.books.api.domain.Book;
-import com.bubah.books.api.domain.BookId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
-//@Repository
-//@Profile("!local")
+@Repository
 public class MongodbBookRepository  implements BookRepository {
 
+    // TODO: this should be something persistent
     private static Long ID_COUNTER = 0L;
 
     @Autowired

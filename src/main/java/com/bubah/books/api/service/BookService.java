@@ -4,7 +4,6 @@ import com.bubah.books.api.domain.Book;
 import com.bubah.books.api.domain.BookId;
 import com.bubah.books.api.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
 public class BookService {
 
     @Autowired
-    @Qualifier("inMemoryBookRepository")
     BookRepository bookRepository;
 
     public List<Book> getBooks() {
